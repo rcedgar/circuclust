@@ -3,8 +3,9 @@
 Circular alignment and clustering of nt sequences.
 
 Align all-vs-all query-vs-database, with -rotated rotates to closest db seq:
-	<pre>
-circuclust -align query.fa \
+
+<pre>
+  circuclust -align query.fa \
 	-db db.fa \
 	-output alignments.txt \
 	-tsvout hits.tsv \
@@ -14,8 +15,9 @@ circuclust -align query.fa \
 Cluster using UCLUST algorithm with circular global alignment,
   both plus and minus strands are checked,
   minimum fractional identity is specified by -id option:
+
 <pre>
- circuclust -cluster seqs.fa \
+  circuclust -cluster seqs.fa \
  	-id 0.9 \
 	-fastaout centroids.fa \
 	-tsvout hits.tsv
