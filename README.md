@@ -2,14 +2,13 @@
 
 Circular alignment and clustering of nt sequences.
 
-Align all-vs-all query-vs-database, with -rotated rotates to closest db seq:
+all-vs-all circular global alignment of query-vs-database:
 
 <pre>
   circuclust -align query.fa \
 	-db db.fa \
 	-output alignments.txt \
 	-tsvout hits.tsv \
-	-rotated rot.fa
 </pre>
 
 Cluster using UCLUST algorithm with circular global alignment,
