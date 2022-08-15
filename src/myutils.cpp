@@ -2064,10 +2064,11 @@ void Help()
 	printf("\n");
 	printf("Circular alignment and clustering of nt sequences.\n");
 	printf("\n");
-	printf("Align all-vs-all query-vs-database:\n\n");
-	printf("   circuclust -align query.fa -db db.fa -output alignments.txt -tsvout hits.tsv\n");
+	printf("Align all-vs-all query-vs-database, with -rotated rotates to closest db seq:\n\n");
+	printf("   circuclust -align query.fa -db db.fa -output alignments.txt -tsvout hits.tsv -rotated rot.fa\n");
 	printf("\n");
 	printf("Cluster using UCLUST algorithm with circular global alignment,\n");
+	printf("  both plus and minus strands are checked,\n");
 	printf("  minimum fractional identity is specified by -id option:\n\n");
 	printf("   circuclust -cluster seqs.fa -id 0.9 -fastaout centroids.fa -tsvout hits.tsv\n");
 	printf("\n");
