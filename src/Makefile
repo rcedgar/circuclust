@@ -1,10 +1,13 @@
-UNAME_S := $(shell uname -s)
+BINDIR := ../bin
+OBJDIR := o
+BINPATH := $(BINDIR)/circuclust
 
 CPPFLAGS := $(CPPFLAGS) -DNDEBUG -pthread
 
 CXX = g++
 CXXFLAGS := $(CXXFLAGS) -O3 -fopenmp -ffast-math -msse -mfpmath=sse
 
+UNAME_S := $(shell uname -s)
 LDFLAGS := $(LDFLAGS) -O3 -fopenmp -pthread -lpthread
 ifeq ($(UNAME_S),Linux)
     LDFLAGS += -static
@@ -41,56 +44,60 @@ HDRS = \
   sfasta.h \
   sort.h \
   tracebit.h \
+  translator.h \
   xdpmem.h \
 
 OBJS = \
-  o/align.o \
-  o/alignpair.o \
-  o/alndata.o \
-  o/alpha.o \
-  o/cluster.o \
-  o/codes.o \
-  o/fastaseqsource.o \
-  o/fastq.o \
-  o/fastqseqsource.o \
-  o/fileseqsource.o \
-  o/filetype.o \
-  o/linereader.o \
-  o/lockobj.o \
-  o/mx.o \
-  o/objmgr.o \
-  o/circuclust_main.o \
-  o/myutils.o \
-  o/overhangs.o \
-  o/partition.o \
-  o/pathinfo.o \
-  o/revcompseq.o \
-  o/rotate.o \
-  o/rotatelongorf.o \
-  o/search.o \
-  o/seqdb.o \
-  o/seqdbfromfasta.o \
-  o/seqinfo.o \
-  o/seqsource.o \
-  o/sfasta.o \
-  o/substmx.o \
-  o/tracebackbitmem.o \
-  o/translator.o \
-  o/usort.o \
-  o/viterbifastmem.o \
-  o/writealn.o \
+  $(OBJDIR)/align.o \
+  $(OBJDIR)/alignpair.o \
+  $(OBJDIR)/alndata.o \
+  $(OBJDIR)/alpha.o \
+  $(OBJDIR)/cluster.o \
+  $(OBJDIR)/codes.o \
+  $(OBJDIR)/fastaseqsource.o \
+  $(OBJDIR)/fastq.o \
+  $(OBJDIR)/fastqseqsource.o \
+  $(OBJDIR)/fileseqsource.o \
+  $(OBJDIR)/filetype.o \
+  $(OBJDIR)/linereader.o \
+  $(OBJDIR)/lockobj.o \
+  $(OBJDIR)/mx.o \
+  $(OBJDIR)/objmgr.o \
+  $(OBJDIR)/circuclust_main.o \
+  $(OBJDIR)/myutils.o \
+  $(OBJDIR)/overhangs.o \
+  $(OBJDIR)/partition.o \
+  $(OBJDIR)/pathinfo.o \
+  $(OBJDIR)/revcompseq.o \
+  $(OBJDIR)/rotate.o \
+  $(OBJDIR)/rotatelongorf.o \
+  $(OBJDIR)/search.o \
+  $(OBJDIR)/seqdb.o \
+  $(OBJDIR)/seqdbfromfasta.o \
+  $(OBJDIR)/seqinfo.o \
+  $(OBJDIR)/seqsource.o \
+  $(OBJDIR)/sfasta.o \
+  $(OBJDIR)/substmx.o \
+  $(OBJDIR)/tracebackbitmem.o \
+  $(OBJDIR)/translator.o \
+  $(OBJDIR)/usort.o \
+  $(OBJDIR)/viterbifastmem.o \
+  $(OBJDIR)/writealn.o \
 
 .PHONY: clean
 
-o/circuclust : o/ $(OBJS)
-	$(CXX) $(LDFLAGS) $(OBJS) -o $@
-	strip -d o/circuclust
+$(BINPATH) : $(BINDIR)/ $(OBJDIR)/ $(OBJS)
+	$(CXX) $(LDFLAGS) $(OBJS) -o $(BINPATH)
+	strip -d $(BINPATH)
 
-o/ :
-	mkdir -p o/
+$(OBJDIR)/ :
+	mkdir -p $(OBJDIR)/
 
-o/%.o : %.cpp $(HDRS)
+$(BINDIR)/ :
+	mkdir -p $(BINDIR)/
+
+$(OBJDIR)/%.o : %.cpp $(HDRS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
 
 clean:
-	-rm -rf o/
+	rm -rf $(OBJDIR)/ $(BINPATH)

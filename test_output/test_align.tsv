@@ -1,0 +1,6 @@
+TestSeq	TestSeq	480	+	100.0
+Rot10	TestSeq	10	+	100.0
+Rot20	TestSeq	20	+	100.0
+TestSeq_RevComp	TestSeq	480	-	100.0
+Rot10_RevComp	TestSeq	10	-	100.0
+Rot20_RevComp	TestSeq	20	-	100.0

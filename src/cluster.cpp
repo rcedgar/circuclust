@@ -33,7 +33,9 @@ static void OnHit(const AlnData &AD, uint TargetSeqIndex)
 		fprintf(g_fTsv, "H");
 		fprintf(g_fTsv, "\t%s", AD.m_LabelQ.c_str());
 		fprintf(g_fTsv, "\t%s", AD.m_LabelT.c_str());
+		fprintf(g_fTsv, "\t%c", pom(AD.m_Plus));
 		fprintf(g_fTsv, "\t%.1f", 100.0*AD.m_FractId);
+		fprintf(g_fTsv, "\t%u", AD.m_StartPosQ);
 		fprintf(g_fTsv, "\n");
 		}
 
@@ -110,13 +112,15 @@ void cmd_cluster()
 	uint ClusterCount = 0;
 	uint HitCount = 0;
 	uint OverhangCount = 0;
-	for (unsigned QuerySeqIndex = 0; QuerySeqIndex < QuerySeqCount; ++QuerySeqIndex)
+	for (unsigned QuerySeqIndex = 0; QuerySeqIndex < QuerySeqCount+1; ++QuerySeqIndex)
 		{
 		if (optset_overhangs)
-			ProgressStep(QuerySeqIndex, QuerySeqCount, "Clustering, %u overhangs", OverhangCount);
+			ProgressStep(QuerySeqIndex, QuerySeqCount+1, "Clustering, %u overhangs", OverhangCount);
 		else
-			ProgressStep(QuerySeqIndex, QuerySeqCount, "Clustering %u clusters %u hits",
+			ProgressStep(QuerySeqIndex, QuerySeqCount+1, "Clustering %u clusters %u hits",
 			  ClusterCount, HitCount);
+		if (QuerySeqIndex == QuerySeqCount)
+			break;
 
 		string QueryLabel;
 		string QuerySeq;
@@ -188,6 +192,7 @@ void cmd_cluster()
 			SeqToFasta(g_fFa, QueryLabel, QuerySeq.c_str());
 			}
 		}
+
 	if (ShortCount > 0)
 		Warning("%u short sequences < %unt discarded", ShortCount, MINL);
 

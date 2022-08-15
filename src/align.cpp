@@ -15,7 +15,6 @@ void cmd_align()
 	SeqDB DB;
 	Query.FromFasta(opt(align));
 	DB.FromFasta(opt(db));
-	FILE *fOut = CreateStdioFile(opt(output));
 	FILE *fTsv = CreateStdioFile(opt(tsvout));
 	FILE *fFa = CreateStdioFile(opt(rotated));
 	FILE *fAln = CreateStdioFile(opt(alnout));
@@ -39,14 +38,12 @@ void cmd_align()
 
 			AlnData AD;
 			AlignPair(LabelQ, SeqQ, LabelT, SeqT, AD);
-			AD.WriteAln(fOut);
 			AD.WriteTsv(fTsv);
 			AD.WriteFasta(fFa);
 			AD.WriteAln(fAln);
 			}
 		}
 
-	CloseStdioFile(fOut);
 	CloseStdioFile(fTsv);
 	CloseStdioFile(fAln);
 	CloseStdioFile(fFa);

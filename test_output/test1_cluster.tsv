@@ -1,0 +1,6 @@
+C	TestSeq	.	.
+H	Rot10	TestSeq	+	100.0	10
+H	Rot20	TestSeq	+	100.0	20
+H	TestSeq_RevComp	TestSeq	-	100.0	480
+H	Rot10_RevComp	TestSeq	-	100.0	10
+H	Rot20_RevComp	TestSeq	-	100.0	20
